@@ -4,8 +4,6 @@
 
 ## Ссылки на проект
 
-IP 
+IP 84.201.159.130
 
-Frontend 
-
-Backend https://
+Backend https://api.bitfilms.nomoredomainsmonster.ru
