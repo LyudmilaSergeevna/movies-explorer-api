@@ -57,12 +57,19 @@ function updateUser(req, res, next) {
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Пользователь по указанному _id не найден.');
+      } else {
+        if (validator.isEmail(req.body.email) === false) {
+          throw new BadRequestError('Указан неверный email.');
+        }
+        return res.send(user);
       }
-      return res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError({ message: err.message }));
+        return;
+      } if (err.name === 'MongoServerError') {
+        next(new ConflictError('Пользователь с таким email уже зарегистрирован.'));
         return;
       }
       next(err);
