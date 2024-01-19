@@ -16,7 +16,17 @@ function readAllMovies(req, res, next) {
 
 function createMovie(req, res, next) {
   const {
-    country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail,
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    nameRU,
+    nameEN,
+    thumbnail,
+    movieId,
   } = req.body;
   return movieModel.create({
     country,
@@ -30,6 +40,7 @@ function createMovie(req, res, next) {
     nameEN,
     thumbnail,
     owner: req.user._id,
+    movieId,
   })
     .then((movie) => res.status(201).send(movie))
     .catch((err) => {
